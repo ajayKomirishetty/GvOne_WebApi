@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1d6a4c7752a44cd580e5edb9f6dee296" Name="Diagram1">
+        <EntityTypeShape EntityType="GvOneDbModel.tblAlert" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblLoan" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblLoanStatu" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblRole" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblSetting" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblUser" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblUserAlert" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GvOneDbModel.tblUserLoan" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblUserAl__tblAl__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblLoan__Primary__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblLoan__tblLoan__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblUserLo__tblLo__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblUserLoan__Rid__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblSetting__Uid__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblUserAler__Uid__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.FK__tblUserLoan__Uid__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="GvOneDbModel.tblUserRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

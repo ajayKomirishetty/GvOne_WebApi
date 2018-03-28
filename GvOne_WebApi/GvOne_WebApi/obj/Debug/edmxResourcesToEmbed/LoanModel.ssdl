@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GvOneDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblAlert">
+    <Key>
+      <PropertyRef Name="tblAlertID" />
+    </Key>
+    <Property Name="tblAlertID" Type="bigint" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblLoan">
+    <Key>
+      <PropertyRef Name="tblLoanID" />
+    </Key>
+    <Property Name="tblLoanID" Type="bigint" Nullable="false" />
+    <Property Name="ActualLoanID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrimaryBorrowerID" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedAt" Type="datetime" Nullable="false" />
+    <Property Name="tblLoanStatusID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblLoanStatus">
+    <Key>
+      <PropertyRef Name="tblLoanStatusID" />
+    </Key>
+    <Property Name="tblLoanStatusID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Label" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblRole">
+    <Key>
+      <PropertyRef Name="Rid" />
+    </Key>
+    <Property Name="Rid" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSetting">
+    <Key>
+      <PropertyRef Name="tblSettingID" />
+    </Key>
+    <Property Name="tblSettingID" Type="bigint" Nullable="false" />
+    <Property Name="Uid" Type="bigint" />
+    <Property Name="isAllSettingsEnabled" Type="bit" Nullable="false" />
+    <Property Name="isPushNotificationsEnabled" Type="bit" Nullable="false" />
+    <Property Name="isAlertsEnabled" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="Uid" />
+    </Key>
+    <Property Name="Uid" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mobile" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="isActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUserAlert">
+    <Key>
+      <PropertyRef Name="Uid" />
+      <PropertyRef Name="tblAlertID" />
+    </Key>
+    <Property Name="Uid" Type="bigint" Nullable="false" />
+    <Property Name="tblAlertID" Type="bigint" Nullable="false" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUserLoan">
+    <Key>
+      <PropertyRef Name="Uid" />
+      <PropertyRef Name="tblLoanID" />
+      <PropertyRef Name="Rid" />
+    </Key>
+    <Property Name="Uid" Type="bigint" Nullable="false" />
+    <Property Name="tblLoanID" Type="bigint" Nullable="false" />
+    <Property Name="Rid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUserRole">
+    <Key>
+      <PropertyRef Name="Uid" />
+      <PropertyRef Name="Rid" />
+    </Key>
+    <Property Name="Uid" Type="bigint" Nullable="false" />
+    <Property Name="Rid" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tblLoan__Primary__34C8D9D1">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblLoan" Type="Self.tblLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="tblLoan">
+        <PropertyRef Name="PrimaryBorrowerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblLoan__tblLoan__35BCFE0A">
+    <End Role="tblLoanStatus" Type="Self.tblLoanStatus" Multiplicity="0..1" />
+    <End Role="tblLoan" Type="Self.tblLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLoanStatus">
+        <PropertyRef Name="tblLoanStatusID" />
+      </Principal>
+      <Dependent Role="tblLoan">
+        <PropertyRef Name="tblLoanStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblSetting__Uid__46E78A0C">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+    <End Role="tblSetting" Type="Self.tblSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="tblSetting">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserAl__tblAl__440B1D61">
+    <End Role="tblAlert" Type="Self.tblAlert" Multiplicity="1" />
+    <End Role="tblUserAlert" Type="Self.tblUserAlert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblAlert">
+        <PropertyRef Name="tblAlertID" />
+      </Principal>
+      <Dependent Role="tblUserAlert">
+        <PropertyRef Name="tblAlertID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserAler__Uid__4316F928">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblUserAlert" Type="Self.tblUserAlert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="tblUserAlert">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserLo__tblLo__3D5E1FD2">
+    <End Role="tblLoan" Type="Self.tblLoan" Multiplicity="1" />
+    <End Role="tblUserLoan" Type="Self.tblUserLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLoan">
+        <PropertyRef Name="tblLoanID" />
+      </Principal>
+      <Dependent Role="tblUserLoan">
+        <PropertyRef Name="tblLoanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserLoan__Rid__3E52440B">
+    <End Role="tblRole" Type="Self.tblRole" Multiplicity="1" />
+    <End Role="tblUserLoan" Type="Self.tblUserLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRole">
+        <PropertyRef Name="Rid" />
+      </Principal>
+      <Dependent Role="tblUserLoan">
+        <PropertyRef Name="Rid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserLoan__Uid__3C69FB99">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblUserLoan" Type="Self.tblUserLoan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="tblUserLoan">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserRole__Rid__398D8EEE">
+    <End Role="tblRole" Type="Self.tblRole" Multiplicity="1" />
+    <End Role="tblUserRole" Type="Self.tblUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRole">
+        <PropertyRef Name="Rid" />
+      </Principal>
+      <Dependent Role="tblUserRole">
+        <PropertyRef Name="Rid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblUserRole__Uid__38996AB5">
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+    <End Role="tblUserRole" Type="Self.tblUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUser">
+        <PropertyRef Name="Uid" />
+      </Principal>
+      <Dependent Role="tblUserRole">
+        <PropertyRef Name="Uid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GvOneDbModelStoreContainer">
+    <EntitySet Name="tblAlert" EntityType="Self.tblAlert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLoan" EntityType="Self.tblLoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLoanStatus" EntityType="Self.tblLoanStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRole" EntityType="Self.tblRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSetting" EntityType="Self.tblSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserAlert" EntityType="Self.tblUserAlert" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserLoan" EntityType="Self.tblUserLoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblUserRole" EntityType="Self.tblUserRole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblLoan__Primary__34C8D9D1" Association="Self.FK__tblLoan__Primary__34C8D9D1">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblLoan" EntitySet="tblLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblLoan__tblLoan__35BCFE0A" Association="Self.FK__tblLoan__tblLoan__35BCFE0A">
+      <End Role="tblLoanStatus" EntitySet="tblLoanStatus" />
+      <End Role="tblLoan" EntitySet="tblLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblSetting__Uid__46E78A0C" Association="Self.FK__tblSetting__Uid__46E78A0C">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblSetting" EntitySet="tblSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserAl__tblAl__440B1D61" Association="Self.FK__tblUserAl__tblAl__440B1D61">
+      <End Role="tblAlert" EntitySet="tblAlert" />
+      <End Role="tblUserAlert" EntitySet="tblUserAlert" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserAler__Uid__4316F928" Association="Self.FK__tblUserAler__Uid__4316F928">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblUserAlert" EntitySet="tblUserAlert" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserLo__tblLo__3D5E1FD2" Association="Self.FK__tblUserLo__tblLo__3D5E1FD2">
+      <End Role="tblLoan" EntitySet="tblLoan" />
+      <End Role="tblUserLoan" EntitySet="tblUserLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserLoan__Rid__3E52440B" Association="Self.FK__tblUserLoan__Rid__3E52440B">
+      <End Role="tblRole" EntitySet="tblRole" />
+      <End Role="tblUserLoan" EntitySet="tblUserLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserLoan__Uid__3C69FB99" Association="Self.FK__tblUserLoan__Uid__3C69FB99">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblUserLoan" EntitySet="tblUserLoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserRole__Rid__398D8EEE" Association="Self.FK__tblUserRole__Rid__398D8EEE">
+      <End Role="tblRole" EntitySet="tblRole" />
+      <End Role="tblUserRole" EntitySet="tblUserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblUserRole__Uid__38996AB5" Association="Self.FK__tblUserRole__Uid__38996AB5">
+      <End Role="tblUser" EntitySet="tblUser" />
+      <End Role="tblUserRole" EntitySet="tblUserRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GvOneDbModelStoreContainer" CdmEntityContainer="GvOneDbEntities">
+    <EntitySetMapping Name="tblAlerts">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblAlert">
+        <MappingFragment StoreEntitySet="tblAlert">
+          <ScalarProperty Name="tblAlertID" ColumnName="tblAlertID" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLoans">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblLoan">
+        <MappingFragment StoreEntitySet="tblLoan">
+          <ScalarProperty Name="tblLoanID" ColumnName="tblLoanID" />
+          <ScalarProperty Name="ActualLoanID" ColumnName="ActualLoanID" />
+          <ScalarProperty Name="PrimaryBorrowerID" ColumnName="PrimaryBorrowerID" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+          <ScalarProperty Name="tblLoanStatusID" ColumnName="tblLoanStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLoanStatus">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblLoanStatu">
+        <MappingFragment StoreEntitySet="tblLoanStatus">
+          <ScalarProperty Name="tblLoanStatusID" ColumnName="tblLoanStatusID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRoles">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblRole">
+        <MappingFragment StoreEntitySet="tblRole">
+          <ScalarProperty Name="Rid" ColumnName="Rid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSettings">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblSetting">
+        <MappingFragment StoreEntitySet="tblSetting">
+          <ScalarProperty Name="tblSettingID" ColumnName="tblSettingID" />
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="isAllSettingsEnabled" ColumnName="isAllSettingsEnabled" />
+          <ScalarProperty Name="isPushNotificationsEnabled" ColumnName="isPushNotificationsEnabled" />
+          <ScalarProperty Name="isAlertsEnabled" ColumnName="isAlertsEnabled" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUser">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserAlerts">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblUserAlert">
+        <MappingFragment StoreEntitySet="tblUserAlert">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="tblAlertID" ColumnName="tblAlertID" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUserLoans">
+      <EntityTypeMapping TypeName="GvOneDbModel.tblUserLoan">
+        <MappingFragment StoreEntitySet="tblUserLoan">
+          <ScalarProperty Name="Uid" ColumnName="Uid" />
+          <ScalarProperty Name="tblLoanID" ColumnName="tblLoanID" />
+          <ScalarProperty Name="Rid" ColumnName="Rid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tblUserRole" TypeName="GvOneDbModel.tblUserRole" StoreEntitySet="tblUserRole">
+      <EndProperty Name="tblRole">
+        <ScalarProperty Name="Rid" ColumnName="Rid" />
+      </EndProperty>
+      <EndProperty Name="tblUser">
+        <ScalarProperty Name="Uid" ColumnName="Uid" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
